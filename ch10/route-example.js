@@ -47,6 +47,6 @@ app.use(function(req, res){
 	res.send('404 - not found');
 });
 
-app.listen(3000, function(){ 
+app.listen(3001, function(){ 
 	console.log('listening on 3000');
 });
