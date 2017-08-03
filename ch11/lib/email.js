@@ -2,7 +2,7 @@ var nodemailer = require('nodemailer');
 
 module.exports = function(credentials){
 
-	var mailTransport = nodemailer.createTransport('SMTP',{
+	var mailTransport = nodemailer.createTransport({
 		service: 'Gmail',
 		auth: {
 			user: credentials.gmail.user,
@@ -11,7 +11,7 @@ module.exports = function(credentials){
 	});
 
 	var from = '"Meadowlark Travel" <info@meadowlarktravel.com>';
-	var errorRecipient = 'youremail@gmail.com';
+	var errorRecipient = 'bidsiemens@gmail.com';
 
 	return {
 		send: function(to, subj, body){
