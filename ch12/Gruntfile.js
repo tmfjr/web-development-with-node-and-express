@@ -12,14 +12,15 @@ module.exports = function(grunt){
 	// configure plugins
 	grunt.initConfig({
 		cafemocha: {
-			all: { src: 'qa/tests-*.js', options: { ui: 'tdd' }, }
+			all: { src: 'qa/tests-stress.js', options: { ui: 'tdd' }, }
+			//all: { src: 'qa/tests-*.js', options: { ui: 'tdd' }, }
 		},
 		jshint: {
 			app: ['meadowlark.js', 'public/js/**/*.js', 'lib/**/*.js'],
 			qa: ['Gruntfile.js', 'public/qa/**/*.js', 'qa/**/*.js'],
 		},
 		exec: {
-			linkchecker: { cmd: 'linkchecker --ignore-url=\'!^(https?:)\/\/localhost\b\' http://localhost:3000' }
+			linkcheck: { cmd: 'linkcheck --ignore-url=\'!^(https?:)\/\/localhostt\b\' http://localhost:3000' }
 		},
 	});	
 

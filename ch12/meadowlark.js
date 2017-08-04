@@ -3,6 +3,8 @@ var http = require('http'),
 	fortune = require('./lib/fortune.js'),
 	formidable = require('formidable');
 
+var bodyParser  = require('body-parser');
+
 var app = express();
 
 var credentials = require('./credentials.js');
@@ -89,7 +91,10 @@ app.use(require('express-session')({
     secret: credentials.cookieSecret,
 }));
 app.use(express.static(__dirname + '/public'));
-app.use(require('body-parser')());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // flash message middleware
 app.use(function(req, res, next){
@@ -249,7 +254,13 @@ Product.findOne = function(conditions, fields, options, cb){
 		cb(err, products && products.length ? products[0] : null);
 	});
 };
-
+/*
+app.use(function(req,res,next){
+    var cluster = require('cluster');
+    if(cluster.isWorker) console.log('Worker %d received request',
+        cluster.worker.id);
+});
+*/
 var VALID_EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
 app.post('/newsletter', function(req, res){
@@ -376,6 +387,10 @@ app.get('/epic-fail', function(req, res){
     process.nextTick(function(){
         throw new Error('Kaboom!');
     });
+});
+
+app.get('/fail', function(req, res){
+    throw new Error('Nope!');
 });
 
 // 404 catch-all handler (middleware)
