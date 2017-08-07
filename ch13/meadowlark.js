@@ -354,8 +354,8 @@ app.get('/vacation/:vacation', function(req, res, next){
 function convertFromUSD(value, currency){
     switch(currency){
     	case 'USD': return value * 1;
-        case 'GBP': return value * 0.6;
-        case 'BTC': return value * 0.0023707918444761;
+        case 'GBP': return value * 0.77;
+        case 'BTC': return value * 0.00030;
         default: return NaN;
     }
 }
